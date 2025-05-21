@@ -7,7 +7,22 @@ const AddCoffee = () => {
     const formData = new FormData(form);
     const newCoffee = Object.fromEntries(formData.entries());
     console.log(newCoffee);
-
+    
+    //send to db
+    fetch('http://localhost:3000/coffees',{
+      method: "POST",
+      headers:{
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(newCoffee)
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log('data after posting to db: ', data);
+      if(data.insertedId){
+        alert("coffee added to db.")
+      }
+    })
 
   }
 
