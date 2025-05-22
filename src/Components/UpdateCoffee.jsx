@@ -2,15 +2,26 @@ import React from 'react';
 import { useLoaderData } from 'react-router';
 
 const UpdateCoffee = () => {
-  const {name, chef, details, taste, photo, supplier, category} = useLoaderData();
+  const {_id, name, chef, details, taste, photo, supplier, category} = useLoaderData();
 
   const handleUpdateCoffee = e =>{
     e.preventDefault();
     const form = e.target;
     const data = new FormData(form);
     const updatedCoffee = Object.fromEntries(data);
-    console.log(updatedCoffee); 
+    // console.log(updatedCoffee); 
 
+    fetch(`http://localhost:3000/coffees/${_id}`,{
+      method:"PUT",
+      headers:{
+        'content-type' : 'application/json'
+      },
+      body: JSON.stringify(updatedCoffee)
+    })
+    .then(res => res.json())
+    .then(data =>{
+      console.log(data);
+    }) 
   }
 
   return (
