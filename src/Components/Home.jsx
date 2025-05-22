@@ -1,6 +1,6 @@
 import React from "react";
 import App from "../App";
-import { useLoaderData } from "react-router";
+import { Link, useLoaderData } from "react-router";
 
 const Home = () => {
   const coffees = useLoaderData();
@@ -24,7 +24,7 @@ const Home = () => {
             {" "}
             <img src={coffee.photo} /> {coffee.name}{" "}
             <button onClick={()=> handleDelete(coffee._id)} className="btn text-red-600">X</button>{" "}
-            <button className="btn">Edit</button>{" "}
+            <Link to={`/updateCoffee/${coffee._id}`}><button className="btn">Edit</button></Link>{" "}
             <button className="btn">Details</button>{" "}
           </div>
         ))}
