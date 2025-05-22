@@ -1,11 +1,34 @@
-import React from 'react';
-import App from '../App';
+import React from "react";
+import App from "../App";
+import { useLoaderData } from "react-router";
 
 const Home = () => {
+  const coffees = useLoaderData();
+
+  const handleDelete = (id) =>{
+    fetch(`http://localhost:3000/coffees/${id}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log("after delete",data);
+    })
+  }
+
   return (
     <div>
-      <App/>
-      
+      <App />
+      <div>
+        {coffees.map((coffee) => (
+          <div key={coffee._id}>
+            {" "}
+            <img src={coffee.photo} /> {coffee.name}{" "}
+            <button onClick={()=> handleDelete(coffee._id)} className="btn text-red-600">X</button>{" "}
+            <button className="btn">Edit</button>{" "}
+            <button className="btn">Details</button>{" "}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

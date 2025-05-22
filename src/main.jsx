@@ -12,10 +12,21 @@ const router = createBrowserRouter([
   {
     path: "/",
     Component: MainLayout,
+    hydrateFallbackElement: <p>Loading coffees...</p>,
     children: [
-      { index: true, Component: Home },
-      { path: "addCoffee", Component: AddCoffee },
-      { path: "updateCoffee", Component: UpdateCoffee },
+      { 
+        index: true, 
+        loader: () => fetch('http://localhost:3000/coffees'),
+        Component: Home 
+      },
+      { 
+        path: "addCoffee", 
+        Component: AddCoffee 
+      },
+      { 
+        path: "updateCoffee", 
+        Component: UpdateCoffee 
+      },
     ],
   },
 ]);
