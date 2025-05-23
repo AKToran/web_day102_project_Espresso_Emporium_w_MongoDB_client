@@ -3,9 +3,11 @@ import { NavLink } from 'react-router';
 
 const Header = () => {
   return (
-    <div className='text-center text-2xl p-4'>
-      <nav>
+    <div className='text-center text-xl p-4'>
+      <nav className='space-x-4'>
         <NavLink to={'/'}>Home</NavLink>
+        <NavLink to={'/signin'}>SignIn</NavLink>
+        <NavLink to={'/signup'}>SignUp</NavLink>
       </nav>
     </div>
   );
