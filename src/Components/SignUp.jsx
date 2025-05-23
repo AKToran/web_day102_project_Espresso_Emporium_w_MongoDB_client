@@ -10,16 +10,35 @@ const SignUp = () => {
     const form = e.target;
     const formData = new FormData(form);
 
-    const { email, password, ...newUser} = Object.fromEntries(formData.entries());
-    console.log(newUser);
+    const { email, password, ...rest} = Object.fromEntries(formData.entries());
+    // console.log(newUser);
 
     //create user in firebase:
     createUser(email, password)
     .then(res =>{
       console.log(res.user);
-      // save profile info in the database
 
+      const newUser = {
+      email,
+      ...rest,
+      creationTime : res.user?.metadata?.creationTime,
+      lastSignInTime : res.user?.metadata?.lastSignInTime
+    }
 
+      // save profile info in the mongo database
+      fetch('http://localhost:3000/users',{
+        method: 'POST',
+        headers:{
+          'content-type':'application/json'
+        },
+        body: JSON.stringify(newUser)
+      })
+      .then(res=> res.json())
+      .then(data=>{
+        if(data.insertedId){
+          alert('data saved to MongoDB');
+        }
+      })
     })
     .catch(err =>{
       console.log(err);
