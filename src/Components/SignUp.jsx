@@ -16,8 +16,7 @@ const SignUp = () => {
     //create user in firebase:
     createUser(email, password)
     .then(res =>{
-      console.log(res.user);
-
+      // console.log(res.user);
       const newUser = {
       email,
       ...rest,
