@@ -6,7 +6,7 @@ const Home = () => {
   const coffees = useLoaderData();
 
   const handleDelete = (id) =>{
-    fetch(`http://localhost:3000/coffees/${id}`, {
+    fetch(`https://coffe-store-server-kappa-sooty.vercel.app/coffees/${id}`, {
       method: 'DELETE'
     })
     .then(res => res.json())

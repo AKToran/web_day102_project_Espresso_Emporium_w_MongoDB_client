@@ -11,7 +11,7 @@ const UpdateCoffee = () => {
     const updatedCoffee = Object.fromEntries(data);
     // console.log(updatedCoffee); 
 
-    fetch(`http://localhost:3000/coffees/${_id}`,{
+    fetch(`https://coffe-store-server-kappa-sooty.vercel.app/coffees/${_id}`,{
       method:"PUT",
       headers:{
         'content-type' : 'application/json'
