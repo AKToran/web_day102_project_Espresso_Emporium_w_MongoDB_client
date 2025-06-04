@@ -22,7 +22,7 @@ const Home = () => {
         {coffees.map((coffee) => (
           <div key={coffee._id}>
             {" "}
-            <img src={coffee.photo} /> {coffee.name}{" "}
+            <img src={coffee.photo || null} /> {coffee.name}{" "}
             <button onClick={()=> handleDelete(coffee._id)} className="btn text-red-600">X</button>{" "}
             <Link to={`/updateCoffee/${coffee._id}`}><button className="btn">Edit</button></Link>{" "}
             <button className="btn">Details</button>{" "}

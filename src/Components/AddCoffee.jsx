@@ -1,3 +1,4 @@
+import axios from "axios";
 import React from "react";
 
 const AddCoffee = () => {
@@ -6,22 +7,35 @@ const AddCoffee = () => {
     const form = e.target;
     const formData = new FormData(form);
     const newCoffee = Object.fromEntries(formData.entries());
-    console.log(newCoffee);
+    // console.log(newCoffee);
     
     //send to db
-    fetch('http://localhost:3000/coffees',{
-      method: "POST",
-      headers:{
-        'content-type' : 'application/json'
-      },
-      body: JSON.stringify(newCoffee)
+    // fetch('http://localhost:3000/coffees',{
+    //   method: "POST",
+    //   headers:{
+    //     'content-type' : 'application/json'
+    //   },
+    //   body: JSON.stringify(newCoffee)
+    // })
+    // .then(res => res.json())
+    // .then(data =>{
+    //   console.log('data after posting to db: ', data);
+    //   if(data.insertedId){
+    //     alert("coffee added to db.")
+    //   }
+    // })
+
+    axios.post('http://localhost:3000/coffees',{
+      ...newCoffee
     })
-    .then(res => res.json())
-    .then(data =>{
-      console.log('data after posting to db: ', data);
-      if(data.insertedId){
-        alert("coffee added to db.")
+    .then(res=> {
+      console.log(res);
+      if(res.data.insertedId){
+        alert('coffee added')
       }
+    })
+    .catch(err=>{
+      console.log(err);
     })
 
   }
