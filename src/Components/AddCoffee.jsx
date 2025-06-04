@@ -9,7 +9,7 @@ const AddCoffee = () => {
     console.log(newCoffee);
     
     //send to db
-    fetch('https://coffe-store-server-kappa-sooty.vercel.app/coffees',{
+    fetch('http://localhost:3000/coffees',{
       method: "POST",
       headers:{
         'content-type' : 'application/json'

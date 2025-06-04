@@ -1,10 +1,26 @@
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
 const Users = () => {
   const initialUsers = useLoaderData();
   const [users, setUsers] = useState(initialUsers);
+
+  // useEffect(()=>{
+  //   fetch('')
+  //   .then(res => res.json())
+  //   .then(data =>{
+  //     console.log(data);
+  //   })
+  // },[])
+
+  useEffect(()=>{
+    axios.get('http://localhost:3000/users/')
+    .then(data=>{
+      console.log(data.data);
+    })
+  },[])
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -17,7 +33,7 @@ const Users = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://coffe-store-server-kappa-sooty.vercel.app/users/${id}`, {
+        fetch(`http://localhost:3000/users/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
