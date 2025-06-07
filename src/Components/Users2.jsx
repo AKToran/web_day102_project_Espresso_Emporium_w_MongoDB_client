@@ -4,7 +4,13 @@ import Swal from "sweetalert2";
 
 const Users2 = () => {
 
-
+  const {data: users, isPending, isError, error } = useQuery({
+    queryKey:['users'],
+    queryFn: async() =>{
+      const res = await fetch('http://localhost:3000/users/');
+      return res.json();
+    }
+  })
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -37,6 +43,13 @@ const Users2 = () => {
     });
   };
 
+  if(isError){
+    return <p>Error Component. {error.message} </p>
+  }
+
+  if(isPending){
+    return <p>LOADING .....</p>
+  }
 
   return (
     <div>
